@@ -6,7 +6,7 @@ const workoutSchema = new mongoose.Schema({
     required: [true, "Workout name is required"]
   },
   duration: {
-    type: Number,
+    type: String,  // This should be updated if duration needs to be a number
     required: [true, "Duration is required"]
   },
   dateAdded: {

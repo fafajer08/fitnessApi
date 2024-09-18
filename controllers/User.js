@@ -6,35 +6,36 @@ const { errorHandler } = require("../auth");
 // User Registration
 module.exports.registerUser = async (req, res) => {
 	try {
-		const { email, mobileNo, password, firstName, lastName } = req.body;
+			const { email, mobileNo, password, firstName, lastName } = req.body;
 
-		// Validate input
-		if (!email.includes("@")) {
-			return res.status(400).json({ error: "Email invalid" });
-		}
-		if (mobileNo.length !== 11) {
-			return res.status(400).json({ error: "Mobile number invalid" });
-		}
-		if (password.length < 8) {
-			return res.status(400).json({ error: "Password must be at least 8 characters" });
-		}
+			// Validate input
+			if (!email.includes("@")) {
+					return res.status(400).json({ error: "Email invalid" });
+			}
+			if (mobileNo.length !== 11) {
+					return res.status(400).json({ error: "Mobile number invalid" });
+			}
+			if (password.length < 8) {
+					return res.status(400).json({ error: "Password must be at least 8 characters" });
+			}
 
-		// Create new user
-		const newUser = new User({
-			firstName,
-			lastName,
-			email,
-			password: bcrypt.hashSync(password, 10),
-			mobileNo
-		});
+			// Create new user
+			const newUser = new User({
+					firstName,
+					lastName,
+					email,
+					password: bcrypt.hashSync(password, 10),
+					mobileNo
+			});
 
-		const savedUser = await newUser.save();
-		res.status(201).json({ message: "Registered Successfully" });
+			await newUser.save();
+			return res.status(201).json({ message: "Registered Successfully" });
 
 	} catch (error) {
-		errorHandler(error, req, res);
+			errorHandler(error, req, res);
 	}
 };
+
 
 // User Authentication
 module.exports.userAuthentication = async (req, res) => {
@@ -59,7 +60,7 @@ module.exports.userAuthentication = async (req, res) => {
 		}
 
 		const token = auth.createAccessToken(user);
-		res.status(200).json({ access: token });
+		return res.status(200).json({ access: token });
 
 	} catch (error) {
 		errorHandler(error, req, res);

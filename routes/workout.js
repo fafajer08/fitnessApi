@@ -1,27 +1,24 @@
-const express = require("express");
-const workoutController = require("../controllers/Workout");
-const auth = require("../auth");
-
-const { verify } = auth; // Importing the verify middleware
-
+const express = require('express');
 const router = express.Router();
+const workoutController = require('../controllers/Workout');
+const { verify } = require('../auth');
 
-// Create a New Workout
-router.post("/addWorkout", verify, workoutController.createWorkout);
+// Create workout
+router.post('/addWorkout', verify, workoutController.addWorkout);
 
-// Retrieve All Workouts for a User
-router.get("/getMyWorkouts", workoutController.getWorkouts);
+// Retrieve all workouts for a user
+router.get('/getMyWorkouts', verify, workoutController.getMyWorkouts);
 
-// Retrieve a Specific Workout
+// Route to get a specific workout by ID
 router.get("/getMyWorkouts/:id", verify, workoutController.getWorkoutById);
 
-// Update a Workout
-router.patch("/updateWorkout/:id", verify, workoutController.updateWorkout);
+// Update a workout
+router.put('/updateWorkout/:id', verify, workoutController.updateWorkout);
 
-// Delete a Workout
-router.delete("/deleteWorkout/:id", verify, workoutController.deleteWorkout);
+// Delete a workout
+router.delete('/deleteWorkout/:id', verify, workoutController.deleteWorkout);
 
-// Complete a Workout Status
-router.patch("/completeWorkoutStatus/:id", verify, workoutController.completeWorkoutStatus);
+// New route for completing a workout status
+router.patch('/completeWorkoutStatus/:id', verify, workoutController.completeWorkoutStatus);
 
 module.exports = router;
