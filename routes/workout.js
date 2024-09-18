@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/addWorkout", verify, workoutController.createWorkout);
 
 // Retrieve All Workouts for a User
-router.get("/getMyWorkouts", verify, workoutController.getWorkouts);
+router.get("/getMyWorkouts", workoutController.getWorkouts);
 
 // Retrieve a Specific Workout
 router.get("/getMyWorkouts/:id", verify, workoutController.getWorkoutById);
