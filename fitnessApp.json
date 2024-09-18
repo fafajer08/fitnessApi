@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/workouts",
+      "description": "Add a new workout for the authenticated user",
+      "requestBody": {
+        "name": "string",
+        "duration": "number",
+        "status": "string"
+      },
+      "response": {
+        "statusCode": 201,
+        "message": "Workout added successfully",
+        "workout": {
+          "_id": "string",
+          "name": "string",
+          "duration": "number",
+          "dateAdded": "date",
+          "status": "string"
+        }
+      },
+      "authRequired": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/workouts",
+      "description": "Retrieve all workouts for the authenticated user",
+      "response": {
+        "statusCode": 200,
+        "workouts": [
+          {
+            "_id": "string",
+            "name": "string",
+            "duration": "number",
+            "dateAdded": "date",
+            "status": "string"
+          }
+        ]
+      },
+      "authRequired": true
+    },
+    {
+      "method": "PUT",
+      "path": "/api/workouts/:id",
+      "description": "Update a specific workout by its ID for the authenticated user",
+      "requestBody": {
+        "name": "string",
+        "duration": "number",
+        "status": "string"
+      },
+      "response": {
+        "statusCode": 200,
+        "message": "Workout updated successfully",
+        "workout": {
+          "_id": "string",
+          "name": "string",
+          "duration": "number",
+          "dateAdded": "date",
+          "status": "string"
+        }
+      },
+      "authRequired": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/workouts/:id",
+      "description": "Delete a specific workout by its ID for the authenticated user",
+      "response": {
+        "statusCode": 200,
+        "message": "Workout deleted successfully"
+      },
+      "authRequired": true
+    }
+  ]
+}
